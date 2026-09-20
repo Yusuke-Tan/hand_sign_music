@@ -41,7 +41,7 @@ def create_hihat_sound(duration=0.15):
     wave = (wave * 32767).astype(np.int16)
     return pygame.sndarray.make_sound(np.column_stack((wave, wave)))
 
-# ベース音生成関数 (少し倍音を加えてベースらしさを出します)
+# ベース音生成関数 
 def create_bass_sound(frequency, duration=0.3):
     t = np.linspace(0, duration, int(SAMPLE_RATE * duration), endpoint=False)
     wave = 0.7 * np.sin(2 * np.pi * frequency * t)
@@ -177,7 +177,7 @@ def main():
             current_time = time.time()
             if current_time - last_play_time >= step_interval:
                 
-                # ★ポイント: ステップが「0」（ループの頭）になった瞬間に、待機中の楽器を合流させる
+                # ★ポイント: ステップが「0」（ループの頭）になった瞬間に、待機中の楽器を合流
                 if current_step == 0 and pending_parts:
                     playing_parts.update(pending_parts)
                     pending_parts.clear()
